@@ -1,5 +1,5 @@
 import Home from './components/Home'
-import User from './components/user/User'
+import User from './components/User'
 
 export const routes = [
     {path : '/',component:Home, name :'anasayfa'},
