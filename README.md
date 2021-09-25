@@ -26,7 +26,7 @@ The project contains 'Vue.js' core structures usage examples.
 
 ```
 
-## Build Setup
+## Setup
 
 ``` bash
 # install dependencies
