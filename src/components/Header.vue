@@ -16,7 +16,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a @click="changeLang">{{language}}</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{ "login" | localization}}</a></li>
+            <li v-if="login" @click="login = !login"><a href="#"><span class="glyphicon glyphicon-log-in" ></span> {{ "logout" | localization}}</a></li>
+            <li v-else @click="login = !login"><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{ "login" | localization}}</a></li>
         </ul>
     </div>
 </nav>
@@ -29,7 +30,8 @@ import {
 export default {
     data() {
         return {
-            language: "TR"
+            language: "TR",
+            login: false
         }
     },
     methods: {
@@ -43,6 +45,11 @@ export default {
             }
 
             this.$router.push("/startpage")
+        }
+    },
+    watch:{
+        login:function(){
+            this.$emit("loginChanged",this.login)
         }
     }
 }

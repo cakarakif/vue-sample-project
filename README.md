@@ -2,6 +2,30 @@
 
 > A Vue.js project
 
+``` bash
+##Information
+The project contains 'Vue.js' core structures usage examples.
+
+#-vue-resource(for Firebase usage)
+
+#-vue-router
+
+#-form
+
+#-component structure
+
+#-filter(for Localization)
+
+#-state management / eventBus
+
+#-footer
+
+#-bootstrap-vue
+
+#-responsive design
+
+```
+
 ## Build Setup
 
 ``` bash

@@ -32,7 +32,7 @@
                             <div class="col-md-12 from-group">
                                 <label>{{ "country" | localization}}</label>
                                 <select v-model="userData.selectedCountry" class="form-control" required>
-                                    <option v-for="country in countries" :key="country"> {{ country.name }}</option>
+                                    <option v-for="(country, index) in countries" :key="index"> {{ country.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div v-for="contact in contacts" :key="contact">
+        <div v-for="(contact,index) in contacts" :key="index">
             <contact-item :isSubmitted="isSubmitted" :contact="contact"></contact-item>
         </div>
     </div>
