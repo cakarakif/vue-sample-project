@@ -6,7 +6,7 @@
 ##Information
 The project contains 'Vue.js' core structures usage examples.
 
-#-vue-resource(for Firebase usage)
+#-vue-resource(for Firebase)
 
 #-vue-router
 
@@ -16,13 +16,15 @@ The project contains 'Vue.js' core structures usage examples.
 
 #-filter(for Localization)
 
-#-state management / eventBus
+#-state management -/ eventBus / emit / props
 
 #-footer
 
 #-bootstrap-vue
 
 #-responsive design
+
+#-directives
 
 ```
 
