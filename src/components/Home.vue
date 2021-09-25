@@ -1,14 +1,13 @@
 <template>
   <div class="container">
-    <h3>Home Component</h3>
+    <h3>{{ "home_component_title" | localization}}</h3>
     <hr>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, earum libero odit optio repellendus sed
-      soluta? Animi, atque blanditiis commodi consequatur distinctio dolorem eaque eos expedita, modi reprehenderit
-      repudiandae soluta.
+      {{"home_content" | localization}}
     </p>
   </div>
 </template>
 <script>
-  export default {}
+  export default {
+  }
 </script>

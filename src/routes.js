@@ -1,7 +1,7 @@
 import Home from './components/Home'
-import User from './components/User'
+import ContactUs from './components/ContactUs'
 
 export const routes = [
-    {path : '/',component:Home, name :'anasayfa'},
-    {path : '/user/:id',component:User, name:'kullanici'}
+    {path : '*',component:Home, name :'home'},
+    {path : '/contactus',component:ContactUs, name:'contactus'}
 ]
