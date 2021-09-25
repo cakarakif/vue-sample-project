@@ -11,6 +11,7 @@ export const tr ={
     "country" : "Ülke",
     "message" : "Mesaj",
     "send" : "Gönder",
-    "form_values" : "Kaydedilen Form Değerleri"
+    "form_values" : "Kaydedilen Form Değerleri",
+    "fill_area" : "Lütfen Tüm Alanları Doldurunuz!"
 
 }

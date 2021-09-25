@@ -5,10 +5,13 @@ import { BootstrapVue} from 'bootstrap-vue'
 import { routes } from "./routes"
 import {en} from './localization/en'
 import {tr} from './localization/tr'
+import VueResource from 'vue-resource'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(en,tr)
+Vue.use(VueResource)
+
 
 export const eventBus = new Vue()
 

@@ -11,6 +11,7 @@ export const en ={
     "country" : "Country",
     "message" : "Message",
     "send" : "Send",
-    "form_values" : "Form Submitted With Values"
+    "form_values" : "Form Submitted With Values",
+    "fill_area" : "Please Fill All Fields!"
 
 }

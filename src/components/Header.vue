@@ -2,7 +2,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <router-link active-class="active" exact tag="li" to="/">
+            <router-link active-class="active" exact tag="li" to="/startpage">
                 <a class="navbar-brand" href="">{{"project_name" | localization}}</a>
             </router-link>
         </div>
@@ -41,6 +41,8 @@ export default {
             } else {
                 this.language = "TR"
             }
+
+            this.$router.push("/startpage")
         }
     }
 }

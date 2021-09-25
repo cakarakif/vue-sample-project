@@ -1,8 +1,11 @@
 <template>
 <div class="container">
+    <div class="alert alert-danger" role="alert" v-if="showAlert">
+        {{"fill_area" | localization}}
+    </div>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="panel panel-warning">
                 <div class="panel-heading">
                     <h4>{{ "contact_us" | localization}}</h4>
@@ -13,11 +16,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">{{ "name" | localization}}</label>
-                                    <input type="text" id="username" class="form-control" :value="userData.name" @input="userData.name = $event.target.value" required>
+                                    <input type="text" id="username" class="form-control" v-model="userData.name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" id="email" class="form-control" :value="userData.email" @input="userData.email = $event.target.value" required>
+                                    <input type="text" id="email" class="form-control" v-model="userData.email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">{{ "phone" | localization}}</label>
@@ -29,7 +32,7 @@
                             <div class="col-md-12 from-group">
                                 <label>{{ "country" | localization}}</label>
                                 <select v-model="userData.selectedCountry" class="form-control" required>
-                                    <option v-for="country in userData.countries" :key="country"> {{ country.name }}</option>
+                                    <option v-for="country in countries" :key="country"> {{ country.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -50,19 +53,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12" v-if="isSubmitted">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4>{{ "form_values" | localization}}</h4>
-                </div>
-                <div class="panel-body">
-                    <p>{{ "name" | localization}}: {{ userData.name }}</p>
-                    <p>Email: {{ userData.email }}</p>
-                    <p>{{ "phone" | localization}}: {{ userData.phone }}</p>
-                    <p style="white-space: pre;">{{ "message" | localization}}: {{userData.message }} </p>
-                    <p>{{ "country" | localization}}: {{ userData.selectedCountry }}</p>
-                </div>
-            </div>
+        <div v-for="contact in contacts" :key="contact">
+            <contact-item :isSubmitted="isSubmitted" :contact="contact"></contact-item>
         </div>
     </div>
 
@@ -70,55 +62,95 @@
 </template>
 
 <script>
+import ContactItem from './ContactItem.vue'
 export default {
+    components: {
+        "contact-item": ContactItem
+    },
     data() {
         return {
+            showAlert: false,
+            contacts: [],
             userData: {
                 name: '',
                 email: '',
-                phone: 30,
+                phone: 5556667788,
                 message: '',
-                countries: [{
-                        id: "TR",
-                        name: "Turkey"
-                    },
-                    {
-                        id: "US",
-                        name: "United States of America"
-                    },
-                    {
-                        id: "GB",
-                        name: "United Kingdom"
-                    },
-                    {
-                        id: "DE",
-                        name: "Germany"
-                    },
-                    {
-                        id: "SE",
-                        name: "Sweden"
-                    },
-                    {
-                        id: "KE",
-                        name: "Kenya"
-                    },
-                    {
-                        id: "BR",
-                        name: "Brazil"
-                    },
-                    {
-                        id: "ZW",
-                        name: "Zimbabwe"
-                    }
-                ],
                 selectedCountry: ''
             },
+            countries: [{
+                    id: "TR",
+                    name: "Turkey"
+                },
+                {
+                    id: "US",
+                    name: "United States of America"
+                },
+                {
+                    id: "GB",
+                    name: "United Kingdom"
+                },
+                {
+                    id: "DE",
+                    name: "Germany"
+                },
+                {
+                    id: "SE",
+                    name: "Sweden"
+                },
+                {
+                    id: "KE",
+                    name: "Kenya"
+                },
+                {
+                    id: "BR",
+                    name: "Brazil"
+                },
+                {
+                    id: "ZW",
+                    name: "Zimbabwe"
+                }
+            ],
             isSubmitted: false
         }
     },
+    created() {
+        this.getContacts();
+    },
     methods: {
         submit() {
-            this.isSubmitted = true;
+            if (this.checkForm()) {
+                this.$http.post('https://vuejs-vue-resource-eba0f-default-rtdb.firebaseio.com/contactus.json',
+                    this.userData).then((response) => {
+                    this.getContacts()
+                })
+            } else {
+                this.showAlert= true
+            }
+        },
+        getContacts() {
+            this.$http.get('https://vuejs-vue-resource-eba0f-default-rtdb.firebaseio.com/contactus.json',
+                this.userData).then((response) => {
+
+                this.contacts = []
+                let data = response.body
+                if (response.body) {
+                    for (let key in data) {
+                        this.contacts.push(data[key])
+                    }
+                }
+                if (this.contacts.length > 0) {
+                    this.isSubmitted = true;
+                }
+            })
+        },
+        checkForm() {
+            for (let key in this.userData) {
+                if (this.userData[key] == '') {
+                    return false
+                }
+            }
+            return true
         }
     }
 }
